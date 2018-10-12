@@ -5,7 +5,7 @@
 ## removed from the NANO version due to low dynamic memory of the board.
 ## The automaticScan.sh script allows for multiple scans and automatic plots as well as calibration.
 ## To use automaticScan.sh, the files triggerControl.py, calfitplot.py, gnup.sh must be in the same dir.
-## Required Python3 packages are numpy, scipy
+## Required Python3 packages are numpy, scipy, ArgumentParser, RawTextHelpFormatter and serial
 
 
 
