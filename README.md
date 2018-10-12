@@ -1,3 +1,14 @@
+## This repository is a modified clone of https://github.com/ffschm/SiPMTriggerFirmware and 
+## all credits of the original FW and readout methods belong to Fabian P. Schmidt.
+## The ControllerAndCounter was updated to v4, where communication with the triggerControl.py script 
+## was established, a bug fixed where threshold values were miscalculated and the spectrum storage was
+## removed from the NANO version due to low dynamic memory of the board.
+## The automaticScan.sh script allows for multiple scans and automatic plots as well as calibration.
+## To use automaticScan.sh, the files triggerControl.py, calfitplot.py, gnup.sh must be in the same dir.
+## Required Python3 packages are numpy, scipy
+
+
+
 # SiPM Trigger Controller&Counter
 This firmware allows an arduino to be used as a controller of the digital potentiometer on the SiPMTrigger board
 as well as a simple scaler.
