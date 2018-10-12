@@ -1,1 +1,5 @@
 pyserial
+numpy
+scipy
+ArgumentParser
+RawTextHelpFormatter
