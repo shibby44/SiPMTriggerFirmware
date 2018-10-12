@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#                   THIS PROGRAM USES THE cal1.dat cal2.dat and params.dat file created by the triggerControl.py --mode CAL script execution and visualizes
+#                   THIS PROGRAM USES THE cal1.dat cal2.dat and params.dat file created by the complete.py --mode CAL script execution and visualizes
 ##                  the gain and offset evaluating functions and parameters. Run simply from the dir of those mentioned files with python3 calfitplot.py
 #######
 ########
@@ -41,7 +41,6 @@ def func(x, a, b, c):
 
 def plot1():
     fig, ax = plt.subplots(1,1)
-    plt.title('Darstellung der Kalibrierung durch die Software')
     ax.plot(xdata, ydata1, 'b-', label='Spektrum CH%1d, dac1/2: %2.1d/%2.1d' % tuple(labdat1))
     ax.axvline(x=pop[0][1], color='r', linestyle='solid')
     ax.axvline(x=pop[0][2], color='r', linestyle='solid')
@@ -60,12 +59,11 @@ def plot1():
     ax.set_yticks(np.arange(0,12,0.2), minor = True)
     ax.grid(which='minor', color='lightgray')
     ax.grid(which='major', color='black')
-    ax.legend(fancybox=True, framealpha=1)
+    ax.legend()
     fig.savefig("calFIT1.pdf", bbox_inches='tight')
 
 def plot2():
     fig, ax = plt.subplots(1,1)
-    plt.title('Darstellung der Kalibrierung durch die Software')
     ax.plot(xdata, ydata2, 'b-', label='Spektrum CH%1d, dac1/2: %2.1d/%2.1d' % tuple(labdat2)) 
     ax.axvline(x=pop[3][1], color='r', linestyle='solid')
     ax.axvline(x=pop[3][2], color='r', linestyle='solid')
@@ -84,7 +82,7 @@ def plot2():
     ax.set_yticks(np.arange(0,12,0.2), minor = True)
     ax.grid(which='minor', color='lightgray')
     ax.grid(which='major', color='black')
-    ax.legend(fancybox=True, framealpha=1)
+    ax.legend()
     fig.savefig("calFIT2.pdf", bbox_inches='tight')
 
 
