@@ -12,7 +12,7 @@ import os
 #Global variables
 chan=1 #channel in use
 retries=2   #Number of automatic retries for calibration
-mod=None  #Mode select
+mod=None  #Mode select integer
 params = []  #ARRAY of FIT-Parameters for calibration
 gain,offset,intime=0,0,1000
 parfile=open("params.dat", "w")
@@ -144,7 +144,9 @@ def fitting(xdata, ydata, uplim, lolim):
    
     popt, pcov = curve_fit(func, xodata, yodata, bounds=([-np.inf, 10, 0],[np.inf, 40, 10]))
     popt
-    print(popt[0], popt[1], popt[2], file=parfile)
+    perr = np.sqrt(np.diag(pcov))
+    print(popt[0], popt[1], popt[2], perr[1], file=parfile)
+    print(popt[0], popt[1], popt[2], perr[1])
     return popt[1]         
          
 def prepfit(xdata, ydata, dac1, dac2):
@@ -248,7 +250,7 @@ def precalibration(ser, string, file=sys.stderr):
     offset=(2*dac1-dac2)
     print("PRECAL CH",chan,": DAC1/2:",dac1,"/",dac2, file=sys.stdout)
     if gain > 0:
-        print(chan, dac1, dac2, file=parfile)
+        print(chan, dac1, dac2, 0, file=parfile)
         prepfit(xdata, ydata, dac1, dac2)
     else:
         print("retrying..")
@@ -311,7 +313,7 @@ def calibration(ser):
                 print("calibrating CH",chan, file=sys.stderr)
         while gain < 1 and retr<retries:
             retr+=1
-            start_calib(ser, chan)
+            precalibration(ser, '# Threshold scan finished.\r\n')
         if retr > retries:
             print("ERROR, NO CALIBRATION ACHIEVED FOR CH: ",chan, file=sys.stderr)
             break
@@ -319,9 +321,9 @@ def calibration(ser):
             retr = 0
             print("")
             print("awaiting controller response..")
-            resetMode(ser)
-            set_gain(ser)
-            set_offset(ser)
+            #resetMode(ser)
+            #set_gain(ser)
+            #set_offset(ser)
             gain=0
     
     
